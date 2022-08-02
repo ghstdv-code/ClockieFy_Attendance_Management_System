@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="ClockiFyAMS.Modals.DialogModal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClockiFyAMS.Modals"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    
+    <Grid Margin="10" MaxWidth="250">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan="3" Margin="0 0 0 10">
+            <materialDesign:PackIcon Kind="BlogOutline"
+                                         Width="30" Height="30"
+                                         Foreground="#F9A825"
+                                         x:Name="mdIcon" VerticalAlignment="Center"/>
+            <TextBlock x:Name="tbMessage" FontSize="12"
+                       FontFamily="Roboto"
+                       VerticalAlignment="Center"
+                       Margin="5 0 5 0" TextWrapping="WrapWithOverflow" MaxWidth="200"/>
+        </StackPanel>
+
+        <Button Content="Okay" x:Name="cmd1" 
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" 
+                Grid.Row="1" Grid.Column="2"
+                CommandParameter="cmd1execute"
+                Foreground="White"/>
+        <Button Content="Cancel" x:Name="cmd2"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                Grid.Row="1" Grid.Column="0" 
+                CommandParameter="cmd2execute"
+                Foreground="White"/>
+    </Grid>
+</UserControl>

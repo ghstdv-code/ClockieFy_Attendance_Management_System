@@ -1,0 +1,260 @@
+﻿<UserControl x:Class="ClockiFyAMS.Modals.EmployeeList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="520" d:DesignWidth="1260">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+    
+    <md:Card Margin="10"
+             md:ShadowAssist.ShadowDepth="Depth4">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="14*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Text="Employee List"
+                VerticalAlignment="Top"
+                Margin="15 5"
+                Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                Foreground="Gray"
+                Grid.Row="0"/>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="0" HorizontalAlignment="Right">
+                
+                <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         md:HintAssist.Hint="Input Queries " Padding="5" x:Name="tbx_Search"
+                         TextAlignment="Left" VerticalAlignment="Center"
+                         Width="180" BorderThickness="2" BorderBrush="#6D4C41"/>
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        Margin="10 0 10 0" x:Name="btn_Search" Click="btn_Search_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Kind="AccountSearch"
+                                     VerticalAlignment="Center"
+                                     Margin="0 0 5 0"/>
+                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                   Text="Search"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        Background="#388E3C"
+                        BorderBrush="#388E3C"
+                        Margin="10 0 10 0"
+                        x:Name="btn_Add"
+                        Click="btn_Add_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Kind="AccountMultiplePlus"
+                                     VerticalAlignment="Center"
+                                     Margin="0 0 5 0"/>
+                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                   Text="Add new Employee"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                        Background="#388E3C"
+                        BorderBrush="#388E3C"
+                        Margin="0 0 15 0"
+                        x:Name="refresh"
+                        Click="refresh_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <md:PackIcon Kind="Refresh"
+                                     VerticalAlignment="Center"
+                                     Margin="0 0 5 0"/>
+                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                   Text="Refresh"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <md:Card Grid.Row="1" Margin="15 5 15 15">
+                <DataGrid CanUserAddRows="False" Margin="5"
+                                      AutoGenerateColumns="False"
+                                      HeadersVisibility="Column"
+                                      CanUserDeleteRows="False"
+                                      CanUserResizeRows="False"
+                                      CanUserReorderColumns="False"
+                                      CanUserResizeColumns="False"
+                                      SelectionMode="Single"
+                                      x:Name="dgvPresentEnt"
+                                      >
+
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn IsReadOnly="True"
+                                                Header="UID"
+                                                Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                               Text="{Binding UID}"
+                                               FontSize="9"
+                                               TextWrapping="Wrap"
+                                               VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn IsReadOnly="True"
+                                                Header="Full Name"
+                                                Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                               Text="{Binding FullName}"
+                                               FontSize="13"
+                                               VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+
+                        <DataGridTemplateColumn IsReadOnly="True"
+                                                Header="Job Description"
+                                                Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                               Text="{Binding JobDescription}"
+                                               FontSize="13"
+                                               VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn IsReadOnly="True"
+                                                Header="Gender"
+                                                Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                               Text="{Binding Gender}"
+                                               FontSize="13"
+                                               VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn IsReadOnly="True"
+                                                Header="Address"
+                                                Width="250">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                               Text="{Binding Address}"
+                                               FontSize="13"
+                                               VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                        <DataGridTemplateColumn IsReadOnly="True"
+                                                Header="Performance"
+                                                Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                               FontSize="13"
+                                               Text="{Binding Performance}"
+                                               VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Action" IsReadOnly="True" 
+                                               Width="150">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button x:Name="btn_View" Click="btn_View_Click"
+                                            Background="{StaticResource SecondaryHueMidBrush}"
+                                            BorderBrush="{StaticResource SecondaryHueMidBrush}"
+                                            Margin="0 0 10 0"
+                                            Style="{StaticResource MaterialDesignRaisedLightButton}">
+                                            <md:PackIcon Kind="ArchiveEyeOutline"
+                                            Height="24" Width="20"
+                                            Foreground="White"/>
+                                        </Button>
+                    
+                                        <Button Background="#E53935"
+                                                BorderBrush="#E53935"
+                                                Style="{StaticResource MaterialDesignRaisedLightButton}">
+                                            <md:PopupBox StaysOpen="False"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 PlacementMode="BottomAndAlignCentres" 
+                                                 x:Name="PopupBox" Padding="0 3">
+                                                <StackPanel Margin="10">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="auto"/>
+                                                            <RowDefinition Height="auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="5"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <TextBlock Style="{StaticResource MaterialDesignCaptionTextBlock}"
+                                                                   Foreground="Gray"
+                                                                   TextAlignment="Center"
+                                                                   Grid.Row="0"
+                                                                   Grid.ColumnSpan="3"
+                                                                   Text="Are you sure to delete this record?"
+                                                                   Margin="0 0 0 10"/>
+                                                        <Button Grid.Column="0"
+                                                                Grid.Row="1"
+                                                                Content="No"
+                                                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                                                />
+                                                        <Button Grid.Column="2"
+                                                                Grid.Row="1"
+                                                                Content="Yes"
+                                                                x:Name="btnDelete" Click="btnDelete_Click"
+                                                                Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+                                                    </Grid>
+                                                </StackPanel>
+
+                                                <md:PopupBox.ToggleContent>
+                                                    <md:PackIcon Kind="DeleteOutline"
+                                                                     Height="20"
+                                                                     Width="20"
+                                                                     Foreground="White"/>
+                                                </md:PopupBox.ToggleContent>
+                                            </md:PopupBox>
+
+                                        </Button> 
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </md:Card>
+            
+        </Grid>
+    </md:Card>
+</UserControl>

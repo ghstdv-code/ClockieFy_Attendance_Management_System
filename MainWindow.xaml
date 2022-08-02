@@ -1,0 +1,170 @@
+﻿<Window x:Class="ClockiFyAMS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="720" Width="1280" Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <Style x:Key="navButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Width" Value="135"/>
+            <Setter Property="Margin" Value="0 0 10 0"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}"/>
+        </Style>
+    </Window.Resources>
+    
+    <md:DialogHost x:Name="RootDialogHost" Identifier="RootDialogHostId">
+        <Grid Background="#FBFBFB">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <md:Card md:ShadowAssist.ShadowDepth="Depth5"
+                       md:ShadowAssist.ShadowEdges="Bottom">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="6*"/>
+                                    <RowDefinition Height="4*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Horizontal" 
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Margin="15 12 0 0" Grid.Row="0">
+                                    <Image Source="\Resources\Images\timer_96px.bmp"
+                                   Width="50" Height="50"
+                                   Stretch="Uniform"/>
+                                    <StackPanel Orientation="Vertical"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Margin="5 0 0 0">
+                                        <TextBlock Text="CLOCKiFY"
+                                                   Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                                                   FontWeight="Bold"
+                                                   TextAlignment="Left"/>
+                                        <TextBlock Text="ATTENDANCE MANAGEMENT SYSTEM"
+                                                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                   FontWeight="Bold"
+                                                   TextAlignment="Left"/>
+                                        <TextBlock Text="Developer: Gernel Esguerra © 2022"
+                                                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                   FontSize="11"
+                                                   FontStyle="Italic"
+                                                   Foreground="Black"
+                                                   TextAlignment="Left"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!--Navigation-->
+                                <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="15 0 0 0">
+                                    <Button Style="{StaticResource navButton}" x:Name="btn_home" Click="btn_home_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <md:PackIcon Kind="Home" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                            <TextBlock Text="Home" FontSize="12" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Style="{StaticResource navButton}" x:Name="btn_Emlist" Click="btn_Emlist_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <md:PackIcon Kind="AccountGroup" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                            <TextBlock Text="Employees" FontSize="12" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Style="{StaticResource navButton}" x:Name="btn_Records" Click="btn_Records_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <md:PackIcon Kind="TableClock" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                            <TextBlock Text="Records" FontSize="12" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Style="{StaticResource navButton}" x:Name="btn_Administration"
+                                            Click="btn_Administration_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <md:PackIcon Kind="Cog" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                                            <TextBlock Text="Administration" FontSize="12" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                <Button Style="{StaticResource MaterialDesignFlatLightButton}" Width="auto">
+                                    <md:PopupBox StaysOpen="False"
+                                                 HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 PlacementMode="BottomAndAlignCentres" 
+                                                 x:Name="PopupBox" Padding="0 3">
+                                        <ListBox>
+                                            <ListBoxItem x:Name="btnLogout" PreviewMouseDown="btnLogout_PreviewMouseDown"
+                                                         Cursor="Hand">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <md:PackIcon Kind="Power"
+                                                                 Margin="0 0 5 0"
+                                                                 Foreground="gray"
+                                                                 VerticalAlignment="Center"/>
+                                                    <TextBlock Text="Logout" 
+                                                               Style="{StaticResource MaterialDesignBody2TextBlock}"/>
+                                                </StackPanel>
+                                            </ListBoxItem>
+                                            <ListBoxItem x:Name="btn_Info" Cursor="Hand">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <md:PackIcon Kind="InformationOutline"
+                                                                 Margin="0 0 5 0"
+                                                                 Foreground="gray"
+                                                                 VerticalAlignment="Center"/>
+                                                    <TextBlock Text="Information" 
+                                                               Style="{StaticResource MaterialDesignBody2TextBlock}"/>
+                                                </StackPanel>
+                                            </ListBoxItem>
+                                        </ListBox>
+
+
+                                        <md:PopupBox.ToggleContent>
+                                            <StackPanel Orientation="Horizontal">
+                                                <md:PackIcon Kind="AccountCircle"
+                                                             Margin="5 0 2 0"
+                                                             Foreground="gray"
+                                                             VerticalAlignment="Center"/>
+                                                <TextBlock Text="Administrator" 
+                                                           VerticalAlignment="Center"
+                                                           Foreground="Gray"
+                                                           Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                           FontWeight="Bold"/>
+                                                <md:PackIcon Kind="ChevronDown" Margin="2 0 5 0"
+                                                             Foreground="Gray"/>
+                                            </StackPanel>
+                                        </md:PopupBox.ToggleContent>
+                                    </md:PopupBox>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </md:Card>
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1"
+                  Background="#CCCCCC"
+                  x:Name="root_Panel">
+                
+            </Grid>
+        </Grid>
+    </md:DialogHost>
+</Window>
